@@ -6,7 +6,7 @@ $(function() {
 var searchArray = ["Garnet", "Amethyst", "And Pearl", "And Steven!"];
 
 function populate(searchArray, classToAdd, areaToAddTo) {
-    //emoty the area otherwise we will end up adding copies or repeated buttons
+    //empty the area otherwise we will end up adding copies or repeated buttons
     $(areaToAddTo).empty();
     for(var i=0; i<searchArray.length; i++) {
         var button =$("<button>");
@@ -41,4 +41,22 @@ $(document).on("click", ".search-input", function(){
             }
         })
 
+})
+
+$(document).on("click", ".searchImage", function(){
+    var state = $(this).attr("data-state");
+    if(state == "still"){
+        $(this).attr("src", $(this).data("animated"));
+        $(this).attr("data-state", "animated");
+    } else{
+        $(this).attr("src", $(this).data("still"));
+        $(this).attr("data-state", "still");
+    }
+})
+
+$("#addButton").on("click", function(){
+    var newButton = $("input").eq(0).val();
+    searchArray.push(newButton);
+    populate(searchArray, "search-input", "#buttons");
+    return false;
 })
